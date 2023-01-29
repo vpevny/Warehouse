@@ -1,11 +1,55 @@
 import tkinter
 from tkinter import *
 import random
-from NewWindow import new_list
-from defs import correct
-
+import NewWindow
 
 list_of_words = {}
+
+### defs ###
+def correct():
+    if len(list_of_words) == 0:
+        random_word["text"] = ""
+        right_answer["bg"] = "white"
+        right_answer["text"] = ""
+        correct_wrong["text"] = "No words"
+        correct_wrong["bg"] = "orange"
+        user_guess_input["state"] = "normal"
+        user_guess_input.delete(0, len(user_guess_input.get()))
+        user_guess_input["state"] = "readonly"
+    elif random_word["text"] == "":
+        correct_wrong["text"] = ""
+        correct_wrong["bg"] = "white"
+        right_answer["text"] = ""
+        right_answer["bg"] = "white"
+        one_word = random.choice(list(list_of_words.keys()))
+        random_word["text"] = one_word
+        user_guess_input["state"] = "normal"
+    else:
+        if correct_wrong["text"] == "correct" or correct_wrong["text"] == "false":
+            one_wordd = random.choice(list(list_of_words.keys()))
+            random_word["text"] = one_wordd
+            correct_wrong["text"] = ""
+            correct_wrong["bg"] = "white"
+            user_guess_input["state"] = "normal"
+            user_guess_input.delete(0, len(user_guess_input.get()))
+            right_answer["text"] = ""
+            right_answer["bg"] = "white"
+
+
+        else:
+            if list_of_words[random_word["text"]].lower() == user_guess_input.get().lower():
+                correct_wrong["text"] = "correct"
+                correct_wrong["bg"] = "green"
+                list_of_words.pop(random_word["text"])
+                user_guess_input["state"] = "readonly"
+
+
+            else:
+                correct_wrong["text"] = "false"
+                correct_wrong["bg"] = "red"
+                right_answer["text"] = "Right answer: " + list_of_words[random_word["text"]]
+                right_answer["bg"] = "green"
+                user_guess_input["state"] = "readonly"
 
 ### Main window ###
 
@@ -43,7 +87,7 @@ correct_wrong.grid(row=3, column=2)
 tittle2 = tkinter.Label(frame_twentyone, text="", font=("Ink Free", 20, "bold"))
 tittle2.grid(row=5, column=2)
 
-create_new_list = tkinter.Button(frame_twentytwo, text="Load/Create list of words", command=new_list)
+create_new_list = tkinter.Button(frame_twentytwo, text="Load/Create list of words", command = NewWindow.new_list)
 create_new_list.pack()
 
 

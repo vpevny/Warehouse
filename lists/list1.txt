@@ -1,0 +1,1 @@
+{'Libanon': 'Bejrút', 'Saudská Arábie': 'Rijád', 'Katar': 'Dauhá', 'Írán': 'Teherán', 'Kazachstán': 'Astana', 'Uzbekistán': 'Taškent', 'Tádžikistán': 'Dušanbe', 'Kyrgyzstán': 'Biškek', 'Sri Lanka': 'Kolombo', 'Nepál': 'Káthmándú', 'Bangladéš': 'Dháka'}
