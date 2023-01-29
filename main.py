@@ -1,11 +1,10 @@
 import tkinter
 from tkinter import *
 import random
-import NewWindow
-
+import new_window
 list_of_words = {}
 
-### defs ###
+    ######## defs ########
 def correct():
     if len(list_of_words) == 0:
         random_word["text"] = ""
@@ -51,7 +50,7 @@ def correct():
                 right_answer["bg"] = "green"
                 user_guess_input["state"] = "readonly"
 
-### Main window ###
+    ######## window ########
 
 window = Tk()
 window.minsize(width=500, height=500)
@@ -87,7 +86,7 @@ correct_wrong.grid(row=3, column=2)
 tittle2 = tkinter.Label(frame_twentyone, text="", font=("Ink Free", 20, "bold"))
 tittle2.grid(row=5, column=2)
 
-create_new_list = tkinter.Button(frame_twentytwo, text="Load/Create list of words", command = NewWindow.new_list)
+create_new_list = tkinter.Button(frame_twentytwo, text="Load/Create list of words", command=new_window.new_list)
 create_new_list.pack()
 
 

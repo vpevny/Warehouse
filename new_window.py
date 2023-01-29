@@ -6,13 +6,15 @@ import main
 ### Defs ###
 
 def new_list():
+
+    ######## Defs ########
+
     files = os.listdir("//Users//vlastimilpevny//Desktop//WordsLearning//")
     files2 = []
-    print(files)
     for i in files:
         k = i.replace(".txt", "")
         files2.append(k)
-    if "lists" not in files2:
+    if "lists" not in files:
         os.mkdir(os.path.join("//Users//vlastimilpevny//Desktop//WordsLearning", "lists"))
     def add():
         if add_word_key.get() in main.list_of_words:
@@ -115,7 +117,7 @@ def new_list():
             files2.remove(".DS_Store")
         stringvar_options["values"] = files2
 
-    ### Window ###
+    ######## Window ########
 
     window_add_list = Toplevel()
     window_add_list.minsize(width=500, height=500)
@@ -223,5 +225,5 @@ def new_list():
     add_label = Label(frame_five, text= "", bg="red", font=("Ink Free", 18, "bold"))
     add_label.pack_forget()
 
-    window_add_list.bind('<<ComboboxSelected>>', lambda event: loadingtree())
+    window_add_list.bind('<<ComboboxSelected>>', loadingtree)
     window_add_list.bind('<Return>', lambda event: add())
