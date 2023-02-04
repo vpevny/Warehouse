@@ -20,8 +20,11 @@ def new_list():
         if add_word_key.get() in main.list_of_words:
             add_label.pack()
             add_label["text"] = "This word already exists"
+            add_word_key.config(highlightthickness=1)
         elif len(add_word_key.get()) == 0 or len(add_word_value.get()) == 0:
             add_label.pack()
+            add_word_value.config(highlightthickness=1)
+            add_word_key.config(highlightthickness=1)
             add_label["text"] = "Enter key and value words"
 
         else:
@@ -33,6 +36,9 @@ def new_list():
             add_word_value.delete(0, END)
             add_word_key.focus()
             add_label.pack_forget()
+            add_word_value.config(highlightthickness=0)
+            add_word_key.config(highlightthickness=0)
+
 
     def delete_one_item():
         selected_item = tree.selection()[0]
@@ -72,8 +78,12 @@ def new_list():
 
     def new_empty_list():
         if name_of_list.get() == "":
+            add_label.pack()
             add_label["text"] = "Enter name of list"
+            name_of_list.config(highlightthickness=1)
         else:
+            add_label.pack_forget()
+            name_of_list.config(highlightthickness=0)
             clear_list()
             with open(f"//Users//vlastimilpevny//Desktop//WordsLearning//lists//{name_of_list.get()}.txt",
                       "w") as file:
@@ -161,14 +171,14 @@ def new_list():
     new_list_button = Button(frame_six, text= "Create list", command=new_empty_list)
     new_list_button.grid(row=0, column=4)
 
-    name_of_list = Entry(frame_six, justify=CENTER, width=10)
+    name_of_list = Entry(frame_six, justify=CENTER, width=10, highlightthickness=0, highlightcolor="red", highlightbackground="red")
     name_of_list.grid(row=0, column=3)
 
 
-    add_word_key = Entry(frame_one, justify=CENTER)
+    add_word_key = Entry(frame_one, justify=CENTER, highlightthickness=0, highlightcolor="red", highlightbackground="red")
     add_word_key.grid(row=1, column=0)
 
-    add_word_value = Entry(frame_one, justify=CENTER)
+    add_word_value = Entry(frame_one, justify=CENTER, highlightthickness=0, highlightcolor="red", highlightbackground="red")
     add_word_value.grid(row=1, column=2)
 
     add_button = Button(frame_one, text="Add word in list", command=add)
