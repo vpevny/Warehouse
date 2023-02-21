@@ -1,10 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import os
-import main
-
-### Defs ###
-
+list_of_words = {}
 def new_list():
 
     ######## Defs ########
@@ -17,7 +14,7 @@ def new_list():
     if "lists" not in files:
         os.mkdir(os.path.join("//Users//vlastimilpevny//Desktop//WordsLearning", "lists"))
     def add():
-        if add_word_key.get() in main.list_of_words:
+        if add_word_key.get() in list_of_words:
             add_label.pack()
             add_label["text"] = "This word already exists"
             add_word_key.config(highlightthickness=1)
@@ -29,9 +26,9 @@ def new_list():
 
         else:
             add_label.pack_forget()
-            tree.insert("", END, values=(len(main.list_of_words) + 1, add_word_key.get(), add_word_value.get()))
+            tree.insert("", END, values=(len(list_of_words) + 1, add_word_key.get(), add_word_value.get()))
             invisable_label["text"] += 1
-            main.list_of_words[add_word_key.get()] = add_word_value.get()
+            list_of_words[add_word_key.get()] = add_word_value.get()
             add_word_key.delete(0, END)
             add_word_value.delete(0, END)
             add_word_key.focus()
@@ -43,28 +40,28 @@ def new_list():
     def delete_one_item():
         selected_item = tree.selection()[0]
         dyc = tree.item((selected_item))
-        main.list_of_words.pop(dyc["values"][1])
+        list_of_words.pop(dyc["values"][1])
         for item in tree.get_children():
             tree.delete(item)
         c = 1
-        for i in main.list_of_words:
-            tree.insert("", END, values=(c, i, main.list_of_words[i]))
+        for i in list_of_words:
+            tree.insert("", END, values=(c, i, list_of_words[i]))
             c += 1
 
     def clear_list():
         for item in tree.get_children():
             tree.delete(item)
-        main.list_of_words.clear()
+        list_of_words.clear()
 
     def save_list():
         with open(f"//Users//vlastimilpevny//Desktop//WordsLearning//lists//{stringvar.get()}.txt",
                   "w") as file:
-            main.list_of_words.clear()
+            list_of_words.clear()
             for line in tree.get_children():
                 key = (tree.item(line)['values'][1])
                 value = (tree.item(line)['values'][2])
-                main.list_of_words[key] = value
-            file.write(str(main.list_of_words))
+                list_of_words[key] = value
+            file.write(str(list_of_words))
             file.close()
             add_word_key.focus()
 
@@ -109,13 +106,13 @@ def new_list():
                 clear_list()
             else:
                 while len(hhh) != 0:
-                    main.list_of_words[hhh[0]] = hhh[1]
+                    list_of_words[hhh[0]] = hhh[1]
                     hhh.pop(0), hhh.pop(0)
-                for i in main.list_of_words:
+                for i in list_of_words:
                     rrr = []
                     for item in tree.get_children():
                         rrr.append(item)
-                    tree.insert("", END, values=(len(rrr) + 1, i, main.list_of_words[i]))
+                    tree.insert("", END, values=(len(rrr) + 1, i, list_of_words[i]))
 
     def update_listmenu():
         files = os.listdir("//Users//vlastimilpevny//Desktop//WordsLearning//lists")
@@ -206,13 +203,13 @@ def new_list():
                 pass
             else:
                 while len(h) != 0:
-                    main.list_of_words[h[0]] = h[1]
+                    list_of_words[h[0]] = h[1]
                     h.pop(0), h.pop(0)
-                for i in main.list_of_words:
+                for i in list_of_words:
                     rrr = []
                     for item in tree.get_children():
                         rrr.append(item)
-                    tree.insert("", END, values=(len(rrr) + 1, i, main.list_of_words[i]))
+                    tree.insert("", END, values=(len(rrr) + 1, i, list_of_words[i]))
     except FileNotFoundError:
         pass
 
